@@ -45,13 +45,13 @@ enyo.kind({
 		]},
 	],
 	mousePress: function(inSender, inEvent) {
-		this.$.SelectionOrb.applyStyle("left", (inEvent.screenX - 256) + "px");
-		this.$.SelectionOrb.applyStyle("top", (inEvent.screenY - 412) + "px");
-		this.$.SelectionOrb.addStyles("-webkit-transform: scale(0.0);");
+		this.$.SelectionOrb.applyStyle("left", (inEvent.pageX - 256) + "px");
+		this.$.SelectionOrb.applyStyle("top", (inEvent.pageY - 256 - 48) + "px");
+		this.$.SelectionOrb.applyStyle(enyo.vendor + 'transform', 'scale(0.0)');
+		inEvent.preventDefault();
 	},
 	mouseDragged: function(inSender, inEvent) {
-		enyo.log(inEvent);
-		this.$.SelectionOrb.addStyles("-webkit-transform: scale(" + (Math.abs(inEvent.dx) + Math.abs(inEvent.dy)) * 0.003 + ");");
+		this.$.SelectionOrb.applyStyle(enyo.vendor + 'transform', 'scale(' + (Math.abs(inEvent.dx) + Math.abs(inEvent.dy)) * 0.003 + ')');
 		
 		if(this.$.GenerateButton.getDisabled())
 			this.$.GenerateButton.setDisabled(false);
